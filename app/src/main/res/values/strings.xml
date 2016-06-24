@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Recipe Manager</string>
+    <string name="item_label">item label</string>
+</resources>
