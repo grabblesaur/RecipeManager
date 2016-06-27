@@ -14,6 +14,8 @@ import com.qqq.recipemanager.adapter.RecipeAdapter;
 
 public class RecipeListFragment extends Fragment{
 
+    private OnRecipeSelectedInterface mListener;
+
     public interface OnRecipeSelectedInterface {
         void onListRecipeSelected(int index);
     }
@@ -22,16 +24,20 @@ public class RecipeListFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        OnRecipeSelectedInterface listener = (OnRecipeSelectedInterface) getActivity();
+        mListener = (OnRecipeSelectedInterface) getActivity();
 
+        // inflates our fragment view, which represents a LinearLayout with alone RecyclerView in it
         View view = inflater.inflate(R.layout.fragment_list, container, false);
 
+        // identify recyclerView
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.listRecyclerView);
 
+        // sets the LinearLayoutManager
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        RecipeAdapter adapter = new RecipeAdapter(listener);
+        // sets the adapter
+        RecipeAdapter adapter = new RecipeAdapter(mListener);
         recyclerView.setAdapter(adapter);
 
         return view;

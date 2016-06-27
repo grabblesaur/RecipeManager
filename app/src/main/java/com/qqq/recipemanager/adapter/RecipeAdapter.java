@@ -14,6 +14,7 @@ import com.qqq.recipemanager.model.Recipes;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ListViewHolder>{
     private final RecipeListFragment.OnRecipeSelectedInterface mListener;
 
+    // simple constructor
     public RecipeAdapter(RecipeListFragment.OnRecipeSelectedInterface listener) {
         mListener = listener;
     }

@@ -1,8 +1,9 @@
 package com.qqq.recipemanager.activity;
 
-import android.app.*;
-import android.support.v7.app.AppCompatActivity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.qqq.recipemanager.R;
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements RecipeListFragmen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // sets RecipeListFragment in FrameLayout
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         RecipeListFragment fragment = new RecipeListFragment();
