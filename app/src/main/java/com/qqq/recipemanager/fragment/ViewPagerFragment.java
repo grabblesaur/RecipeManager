@@ -25,8 +25,17 @@ public class ViewPagerFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_viewpager, container, false);
 
-        final IngredientsFragment ingredientsFragment = new IngredientsFragment();
-        final DirectionsFragment directionsFragment = new DirectionsFragment();
+        Bundle ingredientsBundle = new Bundle();
+        ingredientsBundle.putInt(KEY_RECIPE_INDEX, index);
+
+        Bundle directionsBundle = new Bundle();
+        directionsBundle.putInt(KEY_RECIPE_INDEX, index);
+
+        final CheckBoxesFragment ingredientsFragment = new IngredientsFragment();
+        ingredientsFragment.setArguments(ingredientsBundle);
+
+        final CheckBoxesFragment directionsFragment = new DirectionsFragment();
+        directionsFragment.setArguments(directionsBundle);
 
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         viewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {

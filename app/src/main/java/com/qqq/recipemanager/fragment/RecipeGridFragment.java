@@ -1,30 +1,30 @@
 package com.qqq.recipemanager.fragment;
 
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.qqq.recipemanager.R;
-import com.qqq.recipemanager.adapter.RecipeListAdapter;
+import com.qqq.recipemanager.adapter.RecipeGridAdapter;
 
-public class RecipeListFragment extends Fragment {
-
-    private OnRecipeSelectedInterface mListener;
+public class RecipeGridFragment extends Fragment {
 
     public interface OnRecipeSelectedInterface {
-        void onListRecipeSelected(int index);
+        void onGridRecipeSelected(int index);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        mListener = (OnRecipeSelectedInterface) getActivity();
+        OnRecipeSelectedInterface listener = (OnRecipeSelectedInterface) getActivity();
 
         // inflates our fragment view, which represents a LinearLayout with alone RecyclerView in it
         View view = inflater.inflate(R.layout.fragment_recyclerview, container, false);
@@ -32,12 +32,16 @@ public class RecipeListFragment extends Fragment {
         // identify recyclerView
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
 
-        // sets the LinearLayoutManager
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        // sets the GridLayoutManager
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        int numColumns = (int) (dpWidth/ 200);
+
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), numColumns);
         recyclerView.setLayoutManager(layoutManager);
 
         // sets the adapter
-        RecipeListAdapter adapter = new RecipeListAdapter(mListener);
+        RecipeGridAdapter adapter = new RecipeGridAdapter(listener);
         recyclerView.setAdapter(adapter);
 
         return view;

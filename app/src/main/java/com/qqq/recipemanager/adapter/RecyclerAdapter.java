@@ -8,23 +8,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.qqq.recipemanager.R;
-import com.qqq.recipemanager.fragment.RecipeListFragment;
 import com.qqq.recipemanager.model.Recipes;
 
-public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ListViewHolder>{
-    private final RecipeListFragment.OnRecipeSelectedInterface mListener;
-
-    // simple constructor
-    public RecipeAdapter(RecipeListFragment.OnRecipeSelectedInterface listener) {
-        mListener = listener;
-    }
+public abstract class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ListViewHolder>{
 
     @Override
     public ListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.list_item, parent, false);
+                inflate(getLayoutId(), parent, false);
         return new ListViewHolder(view);
     }
+
+    protected abstract int getLayoutId();
 
     @Override
     public void onBindViewHolder(ListViewHolder holder, int position) {
@@ -57,7 +52,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ListViewHo
 
         @Override
         public void onClick(View view) {
-            mListener.onListRecipeSelected(mIndex);
+            onRecipeSelected(mIndex);
         }
     }
+
+    protected abstract void onRecipeSelected(int index);
 }
